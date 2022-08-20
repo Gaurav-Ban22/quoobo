@@ -1,4 +1,17 @@
 import argparse
+from ctypes.wintypes import tagMSG
+
+from os import *
+
+
+class algorithm:
+
+    def __init__(self, tags, description, name):
+        self.tags = tags
+        self.description = description
+        self.name= name
+
+
 
 parser = argparse.ArgumentParser();
 subparser = parser.add_subparsers(dest='com', help="sub-command-help")
@@ -7,6 +20,7 @@ about = subparser.add_parser("about", help="about command")
 about.add_argument("-m", help="more about information", action="store_true")
 echo = subparser.add_parser("echo", help = "repeat any singularworded string")
 repeated = echo.add_argument("echoo", nargs="+")
+list = subparser.add_parser("ls", help = "simple lister")
 args = parser.parse_args()
 
 if args.com == "about":
@@ -17,6 +31,10 @@ if args.com == "about":
 elif args.com == "echo":
     x = ""
     for i in enumerate(args.echoo):
-        x += i[1] + ""
+        x += i[1] + " "
+        print(x)
+elif args.com == "ls":
+    fileName = [f for f in listdir(getcwd())]
+    print(fileName)
 
-    print(x)
+    
