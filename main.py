@@ -92,7 +92,7 @@ elif args.com == "disp":
         try:
             li = t.readlines()
             
-            print(colorize(args.shees[0],BLUE))
+            print(colorize(args.shees,BLUE))
             print("---------------------------------")
             for i in (li):        
                 print(colorize(i, GREEN))
