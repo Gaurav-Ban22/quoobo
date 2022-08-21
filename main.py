@@ -86,9 +86,12 @@ elif args.com == "disp":
     with open(os.getcwd()+"/"+args.shees, "r") as t:
         try:
             li = t.readlines()
-            print(colorize(args.shees, WHITE_BOLD))
+            
+            print(colorize(args.shees,BLUE))
+            print("---------------------------------")
             for i in li:
                 print(colorize(i, GREEN))
+            print("---------------------------------")
         except:
             raise ValueError("Cannot read this file")
 
