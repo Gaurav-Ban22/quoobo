@@ -1,5 +1,6 @@
 import argparse
 from ctypes.wintypes import tagMSG
+from datetime import datetime
 
 
 from os import *
@@ -44,6 +45,7 @@ repeated = echo.add_argument("echoo", nargs="+")
 list = subparser.add_parser("ls", help = "blue is file, green is folder")
 repeato = list.add_argument("-u", help="unstable expanded format", action="store_true")
 repeato = list.add_argument("-e", help="expanded format", action="store_true")
+listee = subparser.add_parser("date", help = "time information to show through terminal")
 args = parser.parse_args()
 
 if args.com == "about":
@@ -56,6 +58,12 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
         print(x)
+elif args.com == "date":
+    yes = datetime.now()
+    dat = yes.strftime("%b-%d-%Y")
+    dataso = yes.strftime("%H-%M-%S")
+    print(colorize(dat, PURPLE))
+    print(colorize(dataso, GREEN))
 elif args.com == "ls":
     if (not args.e and not args.u):
         for f in listdir(getcwd()):
