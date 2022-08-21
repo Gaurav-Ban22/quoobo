@@ -62,37 +62,37 @@ elif args.com == "ls":
             
             if (path.isdir(getcwd()+"/"+f)):
                 if (f.startswith(".")):
-                    print(colorize(f, YELLOW))
-                print(colorize(f, GREEN))
+                    print(colorize(f, YELLOW)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                print(colorize(f, GREEN)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
             else:
-                print(colorize(f, BLUE))
+                print(colorize(f, BLUE)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
     elif (args.u):
         for f in listdir(getcwd()):
             
             if (path.isdir(getcwd()+"/"+f)):
                 if (not f.startswith(".")):
-                    print(colorize(f, GREEN))
+                    print(colorize(f, GREEN,) + "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
                     
                 else:
-                    print(colorize(f, YELLOW))
+                    print(colorize(f, YELLOW)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
 
-                for f in listdir(getcwd()+"/"+f):
-                    print("  -" + colorize(f, RED))
+                for x in listdir(getcwd()+"/"+f):
+                    print("  -" + colorize(x, RED)+ "  " + str(path.getsize(getcwd()+"/"+f+"/"+x)) + "  bytes")
             else:
-                print(colorize(f, BLUE))
+                print(colorize(f, BLUE)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
 
     elif(args.e):
         for f in listdir(getcwd()):
             
             if (path.isdir(getcwd()+"/"+f)):
                 if (not f.startswith(".")):
-                    print(colorize(f, GREEN))
-                    for f in listdir(getcwd()+"/"+f):
-                        print("  -" + colorize(f, RED))
+                    print(colorize(f, GREEN)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                    for x in listdir(getcwd()+"/"+f):
+                        print("  -" + colorize(x, RED)+ "  " + str(path.getsize(getcwd()+"/"+f+"/"+x)) + "  bytes")
                 else:
-                    print(colorize(f, YELLOW))
+                    print(colorize(f, YELLOW)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
             else:
-                print(colorize(f, BLUE))
+                print(colorize(f, BLUE)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
 
 
         
