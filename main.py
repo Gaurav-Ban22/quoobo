@@ -69,16 +69,21 @@ elif args.com == "echo":
 elif args.com == "conti":
     files = 0
     dirs = 0
+    dots = 0
     total = 0
     for f in os.listdir(os.getcwd()):
         if os.path.isfile(os.getcwd()+"/"+f):
             files += 1
         if os.path.isdir(os.getcwd()+"/"+f):
-            dirs += 1
-    total = files + dirs
+            if f.startswith("."):
+                dots += 1
+            else:
+                dirs += 1
+    total = files + dirs + dots
 
     print(colorize("Files: " + str(files), CYAN_BOLD))
     print(colorize("Directories: " + str(dirs), GREEN_BOLD))
+    print(colorize("DotFiles: " + str(dots), YELLOW_BOLD))
     print(colorize("Total: " + str(total), WHITE_BOLD))
 
         
