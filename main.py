@@ -1,8 +1,12 @@
 import argparse
+from asyncore import dispatcher_with_send
 from ctypes.wintypes import tagMSG
+from dataclasses import asdict
 from datetime import datetime
+import io
+from ssl import ALERT_DESCRIPTION_NO_RENEGOTIATION
 
-
+yes = datetime.now()
 from os import *
 
 RESET = "\u001B[0m"
@@ -40,9 +44,13 @@ subparser = parser.add_subparsers(dest='com', help="sub-command-help")
 
 about = subparser.add_parser("about", help="about command")
 about.add_argument("-m", help="more about information", action="store_true")
+hau = subparser.add_parser("conti", help="content information")
+
 echo = subparser.add_parser("echo", help = "repeat any singularworded string")
 repeated = echo.add_argument("echoo", nargs="+")
 list = subparser.add_parser("ls", help = "blue is file, green is folder")
+lista = subparser.add_parser("disp", help = "printout") 
+repeated = lista.add_argument("shees")
 repeato = list.add_argument("-u", help="unstable expanded format", action="store_true")
 repeato = list.add_argument("-e", help="expanded format", action="store_true")
 listee = subparser.add_parser("date", help = "time information to show through terminal")
@@ -58,8 +66,34 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
         print(x)
+elif args.com == "conti":
+    files = 0
+    dirs = 0
+    total = 0
+    for f in listdir(getcwd()):
+        if path.isfile(getcwd()+"/"+f):
+            files += 1
+        if path.isdir(getcwd()+"/"+f):
+            dirs += 1
+    total = files + dirs
+
+    print(colorize("Files: " + str(files), CYAN_BOLD))
+    print(colorize("Directories: " + str(dirs), GREEN_BOLD))
+    print(colorize("Total: " + str(total), WHITE_BOLD))
+
+        
+elif args.com == "disp":
+    with open(getcwd()+"/"+args.shees, O_RDONLY) as t:
+        try:
+            li = t.readlines()
+            print(colorize(args.shees, WHITE_BOLD))
+            print(colorize(li, BLUE))
+        except:
+            raise ValueError("Cannot read this file")
+
+        
 elif args.com == "date":
-    yes = datetime.now()
+    
     dat = yes.strftime("%b-%d-%Y")
     dataso = yes.strftime("%H-%M-%S")
     print(colorize(dat, PURPLE))
