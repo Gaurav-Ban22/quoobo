@@ -87,9 +87,9 @@ elif args.com == "disp":
         try:
             li = t.readlines()
             
-            print(colorize(args.shees,BLUE))
+            print(colorize(args.shees[0],BLUE))
             print("---------------------------------")
-            for i in enumerate(li):        
+            for i in (li):        
                 print(colorize(i, GREEN))
             print("---------------------------------")
         except:
