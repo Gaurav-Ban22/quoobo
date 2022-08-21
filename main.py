@@ -70,9 +70,12 @@ elif args.com == "ls":
         for f in listdir(getcwd()):
             
             if (path.isdir(getcwd()+"/"+f)):
-                print(colorize(f, GREEN))
-                if (f.startswith(".")):
+                if (not f.startswith(".")):
+                    print(colorize(f, GREEN))
+                    
+                else:
                     print(colorize(f, YELLOW))
+
                 for f in listdir(getcwd()+"/"+f):
                     print("  -" + colorize(f, RED))
             else:
