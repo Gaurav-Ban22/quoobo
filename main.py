@@ -7,7 +7,7 @@ import io
 from ssl import ALERT_DESCRIPTION_NO_RENEGOTIATION
 
 yes = datetime.now()
-from os import *
+import os
 
 RESET = "\u001B[0m"
 BLACK = "\u001B[30m"
@@ -70,10 +70,10 @@ elif args.com == "conti":
     files = 0
     dirs = 0
     total = 0
-    for f in listdir(getcwd()):
-        if path.isfile(getcwd()+"/"+f):
+    for f in os.listdir(os.getcwd()):
+        if os.path.isfile(os.getcwd()+"/"+f):
             files += 1
-        if path.isdir(getcwd()+"/"+f):
+        if os.path.isdir(os.getcwd()+"/"+f):
             dirs += 1
     total = files + dirs
 
@@ -83,11 +83,12 @@ elif args.com == "conti":
 
         
 elif args.com == "disp":
-    with open(getcwd()+"/"+args.shees, O_RDONLY) as t:
+    with open(os.getcwd()+"/"+args.shees, "r") as t:
         try:
             li = t.readlines()
             print(colorize(args.shees, WHITE_BOLD))
-            print(colorize(li, BLUE))
+            for i in li:
+                print(colorize(i, GREEN))
         except:
             raise ValueError("Cannot read this file")
 
@@ -100,41 +101,41 @@ elif args.com == "date":
     print(colorize(dataso, GREEN))
 elif args.com == "ls":
     if (not args.e and not args.u):
-        for f in listdir(getcwd()):
+        for f in os.listdir(os.getcwd()):
             
-            if (path.isdir(getcwd()+"/"+f)):
+            if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (f.startswith(".")):
-                    print(colorize(f, YELLOW)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
-                print(colorize(f, GREEN)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                    print(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                print(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
             else:
-                print(colorize(f, BLUE)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                print(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
     elif (args.u):
-        for f in listdir(getcwd()):
+        for f in os.listdir(os.getcwd()):
             
-            if (path.isdir(getcwd()+"/"+f)):
+            if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (not f.startswith(".")):
-                    print(colorize(f, GREEN,) + "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                    print(colorize(f, GREEN,) + "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
                     
                 else:
-                    print(colorize(f, YELLOW)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                    print(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
 
-                for x in listdir(getcwd()+"/"+f):
-                    print("  -" + colorize(x, RED)+ "  " + str(path.getsize(getcwd()+"/"+f+"/"+x)) + "  bytes")
+                for x in os.listdir(os.getcwd()+"/"+f):
+                    print("  -" + colorize(x, RED)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f+"/"+x)) + "  bytes")
             else:
-                print(colorize(f, BLUE)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                print(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
 
     elif(args.e):
-        for f in listdir(getcwd()):
+        for f in os.listdir(os.getcwd()):
             
-            if (path.isdir(getcwd()+"/"+f)):
+            if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (not f.startswith(".")):
-                    print(colorize(f, GREEN)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
-                    for x in listdir(getcwd()+"/"+f):
-                        print("  -" + colorize(x, RED)+ "  " + str(path.getsize(getcwd()+"/"+f+"/"+x)) + "  bytes")
+                    print(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                    for x in os.listdir(os.getcwd()+"/"+f):
+                        print("  -" + colorize(x, RED)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f+"/"+x)) + "  bytes")
                 else:
-                    print(colorize(f, YELLOW)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                    print(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
             else:
-                print(colorize(f, BLUE)+ "  " + str(path.getsize(getcwd()+"/"+f)) + "  bytes")
+                print(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
 
 
         
