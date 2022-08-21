@@ -109,7 +109,9 @@ elif args.com == "ls":
             if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (f.startswith(".")):
                     print(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
-                print(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                else:
+
+                    print(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
             else:
                 print(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
     elif (args.u):
