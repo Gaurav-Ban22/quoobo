@@ -65,7 +65,7 @@ elif args.com == "echo":
     x = ""
     for i in enumerate(args.echoo):
         x += i[1] + " "
-        print(x)
+    print(x)
 elif args.com == "conti":
     files = 0
     dirs = 0
@@ -89,7 +89,7 @@ elif args.com == "disp":
             
             print(colorize(args.shees,BLUE))
             print("---------------------------------")
-            for i in li:
+            for i in enumerate(li):        
                 print(colorize(i, GREEN))
             print("---------------------------------")
         except:
