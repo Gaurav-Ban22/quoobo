@@ -9,6 +9,8 @@ from ssl import ALERT_DESCRIPTION_NO_RENEGOTIATION
 yes = datetime.now()
 import os
 
+
+
 RESET = "\u001B[0m"
 BLACK = "\u001B[30m"
 RED = "\u001B[31m"
@@ -30,12 +32,18 @@ WHITE_BOLD = "\033[1;37m"
 def colorize(text, color):
     return color + text + RESET
 
-class algorithm:
+class algo:
 
-    def __init__(self, tags, description, name):
+    def __init__(self, tags, description, name, link):
         self.tags = tags
         self.description = description
+
         self.name= name
+        self.link = link        
+
+algos = [
+    algo(["pathfinding, searching"], "An intelligent greedy algorithm used to intelligently find the most efficient path from one point to another.", "Astar", "https://www.geeksforgeeks.org/a-search-algorithm/"),
+    algo(["looping"], "An algorithm that uses two different speed pointers to find a common number.", "Tortoise and Hare", "https://www.geeksforgeeks.org/a-search-algorithm/")]
 
 
 
@@ -47,13 +55,20 @@ about.add_argument("-m", help="more about information", action="store_true")
 hau = subparser.add_parser("conti", help="content information")
 
 echo = subparser.add_parser("echo", help = "repeat any singularworded string")
-repeated = echo.add_argument("echoo", nargs="+")
+repeated = echo.add_argument("ec-hoo", nargs="+")
 list = subparser.add_parser("ls", help = "blue is file, green is folder")
 lista = subparser.add_parser("disp", help = "printout") 
 repeated = lista.add_argument("shees")
 repeato = list.add_argument("-u", help="unstable expanded format", action="store_true")
 repeato = list.add_argument("-e", help="expanded format", action="store_true")
 listee = subparser.add_parser("date", help = "time information to show through terminal")
+
+alg = subparser.add_parser("searchA", help = "search algo list") 
+algg = alg.add_argument("-n", help="unstable expanded format", action="store_true")
+alggg =alg.add_argument("-c", help="unstable expanded format", action="store_true")
+algggg = alg.add_argument("given")
+
+
 args = parser.parse_args()
 
 if args.com == "about":
@@ -66,6 +81,17 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
     print(x)
+elif args.com == "searchA":
+    if (args.n):
+        y = 0
+        for f in algos:
+            if args.given.lower() in f.name.lower():
+                y += 1
+                print(colorize(f.name, GREEN) + ": " + colorize(f.description, YELLOW)) 
+        if y == 0:
+            print(colorize("None matched your query", RED))
+
+    # elif (args.c):
 elif args.com == "conti":
     files = 0
     dirs = 0
