@@ -34,16 +34,20 @@ def colorize(text, color):
 
 class algo:
 
-    def __init__(self, tags, description, name, link):
+    def __init__(self, tags, description, name, link, index):
         self.tags = tags
         self.description = description
+        self.index = index
 
         self.name= name
         self.link = link        
 
 algos = [
-    algo(["pathfinding, searching"], "An intelligent greedy algorithm used to intelligently find the most efficient path from one point to another.", "Astar", "https://www.geeksforgeeks.org/a-search-algorithm/"),
-    algo(["looping"], "An algorithm that uses two different speed pointers to find a common number.", "Tortoise and Hare", "https://www.geeksforgeeks.org/a-search-algorithm/")]
+    algo(["pathfinding", "searching"], "An intelligent greedy algorithm used to intelligently find the most efficient path from one point to another.", "Astar", "https://www.geeksforgeeks.org/a-search-algorithm/", 1),
+    algo(["looping"], "An algorithm that uses two different speed pointers to find a common number.", "Tortoise and Hare", "https://www.geeksforgeeks.org/a-search-algorithm/", 2),
+    algo(["looping", "searching"], "Searches binarily", "Binary Search", "https://www.geeksforgeeks.org/a-search-algorithm", 3)
+    
+    ]
 
 
 
@@ -66,6 +70,7 @@ listee = subparser.add_parser("date", help = "time information to show through t
 alg = subparser.add_parser("searchA", help = "search algo list") 
 algg = alg.add_argument("-n", help="unstable expanded format", action="store_true")
 alggg =alg.add_argument("-c", help="unstable expanded format", action="store_true")
+alggg =alg.add_argument("-i", help="unstable expanded format", action="store_true")
 algggg = alg.add_argument("given")
 
 
@@ -87,11 +92,30 @@ elif args.com == "searchA":
         for f in algos:
             if args.given.lower() in f.name.lower():
                 y += 1
-                print(colorize(f.name, GREEN) + ": " + colorize(f.description, YELLOW)) 
+                print(str(f.index) + "  " + colorize(f.name, GREEN) + ": " + colorize(f.description, YELLOW)) 
         if y == 0:
             print(colorize("None matched your query", RED))
 
-    # elif (args.c):
+    elif (args.c):
+        y = 0
+        for f in algos:
+            for i in f.tags:
+                if args.given.lower() == i:
+                    y += 1
+                    print(str(f.index) + "  " + colorize(f.name, GREEN) + ": " + colorize(f.description, YELLOW)) 
+        if y == 0:
+            print(colorize("None matched your query", RED))
+    elif (args.i):
+        try:
+            for i in algos:
+                
+                if i .index == int(args.given):
+                    print(str(i.index) + "  " + colorize(i.name, GREEN) + ": " + colorize(i.description, YELLOW)) 
+                    print(colorize(i.link, BLUE)) 
+            
+        except:
+            print(colorize("There was an issue with the index provided", RED))
+
 elif args.com == "conti":
     files = 0
     dirs = 0
