@@ -59,7 +59,7 @@ about.add_argument("-m", help="more about information", action="store_true")
 hau = subparser.add_parser("conti", help="content information")
 
 echo = subparser.add_parser("echo", help = "repeat any singularworded string")
-repeated = echo.add_argument("ec-hoo", nargs="+")
+repeated = echo.add_argument("echoo", nargs="+")
 list = subparser.add_parser("ls", help = "blue is file, green is folder")
 lista = subparser.add_parser("disp", help = "printout") 
 repeated = lista.add_argument("shees")
