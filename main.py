@@ -70,8 +70,12 @@ listee = subparser.add_parser("date", help = "time information to show through t
 alg = subparser.add_parser("searchA", help = "search algo list") 
 algg = alg.add_argument("-n", help="unstable expanded format", action="store_true")
 alggg =alg.add_argument("-c", help="unstable expanded format", action="store_true")
-alggg =alg.add_argument("-i", help="unstable expanded format", action="store_true")
-algggg = alg.add_argument("given")
+algggg =alg.add_argument("-i", help="unstable expanded format", action="store_true")
+algggggggggg =alg.add_argument("-l", help="unstable expanded format", action="store_true")
+alggggggg = alg.add_argument("given")
+
+alga = subparser.add_parser("listA", help = "algo list") 
+
 
 
 args = parser.parse_args()
@@ -86,6 +90,10 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
     print(x)
+elif args.com == "listA":
+    for i in algos:
+            print(str(i.index) + "  " + colorize(i.name, GREEN) + ": " + colorize(i.description, YELLOW)) 
+
 elif args.com == "searchA":
     if (args.n):
         y = 0
@@ -115,6 +123,9 @@ elif args.com == "searchA":
             
         except:
             print(colorize("There was an issue with the index provided", RED))
+
+        
+
 
 elif args.com == "conti":
     files = 0
