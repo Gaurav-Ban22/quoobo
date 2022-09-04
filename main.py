@@ -80,6 +80,9 @@ alggggggg = alg.add_argument("given")
 kotlin = subparser.add_parser("del", help = "delete") 
 java = kotlin.add_argument("file")
 
+kotlina = subparser.add_parser("add", help = "add") 
+javaa = kotlina.add_argument("fileLib")
+
 alga = subparser.add_parser("listA", help = "algo list") 
 
 def tree(path, lvl, unstable):
@@ -106,6 +109,9 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
     print(colorize(x, GREEN))
+elif args.com == "add":
+    fileP = open(os.getcwd() + ("/" + args.fileLib), "x") #x means create file exclusively
+    print(colorize("Created file!", GREEN))
 elif args.com == "del":
     if os.path.isfile(os.getcwd() + ("/" + args.file)):
         x = input(colorize(("Are you sure you want to delete file " + args.file + "? (y/n) "), YELLOW))
