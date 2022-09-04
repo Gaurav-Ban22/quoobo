@@ -8,6 +8,7 @@ yes = datetime.now()
 import os
 
 
+
 RESET = "\u001B[0m"
 BLACK = "\u001B[30m"
 RED = "\u001B[31m"
@@ -64,7 +65,8 @@ repeated = lista.add_argument("shees")
 repeato = list.add_argument("-u", help="unstable expanded format", action="store_true")
 repeato = list.add_argument("-e", help="expanded format", action="store_true")
 listee = subparser.add_parser("date", help = "time information to show through terminal")
-alg = subparser.add_parser("tree", help = "tree") 
+awlg = subparser.add_parser("tree", help = "tree") 
+tre = awlg.add_argument("-b", help="unstable expanded format", action="store_true")
 alg = subparser.add_parser("searchA", help = "search algo list") 
 algg = alg.add_argument("-n", help="unstable expanded format", action="store_true")
 alggg =alg.add_argument("-c", help="unstable expanded format", action="store_true")
@@ -85,14 +87,18 @@ uppercase.add_argument("string", help="the string to convert to uppercase")
 
 
 
-def tree(path, lvl):
+def tree(path, lvl, unstable):
     for file in os.listdir(path):
         if os.path.isfile(os.path.join(path, file)):
             print(colorize(("   " * lvl + "-" + file), GREEN))
-        else:
+        elif not file.startswith(".") and not unstable:
             print(colorize(("   " * lvl + "-" + file), BLUE))
-            tree(os.path.join(path, file), lvl + 1)
+            tree(os.path.join(path, file), lvl + 1, False)
             #can multiply strings by integers to repeat them, I didn't know that :O
+        elif unstable:
+            print(colorize(("   " * lvl + "-" + file), BLUE))
+            tree(os.path.join(path, file), lvl + 1, True)
+            
 
 
 
@@ -109,7 +115,7 @@ elif args.com == "echo":
         x += i[1] + " "
     print(x)
 elif args.com == "tree":
-    tree(os.getcwd(), 0)
+    tree(os.getcwd(), 0, args.b)
 
 elif args.com == "listA":
     for i in algos:
