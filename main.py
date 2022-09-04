@@ -130,9 +130,9 @@ elif args.com == "tree":
                 dirs += 1
     total = files + dirs + dots
 
-    print(colorize("Files: " + str(files), CYAN_BOLD))
-    print(colorize("Directories: " + str(dirs), GREEN_BOLD))
-    print(colorize("DotFiles: " + str(dots), YELLOW_BOLD))
+    print(colorize("\nFiles: " + str(files), CYAN))
+    print(colorize("Directories: " + str(dirs), GREEN))
+    print(colorize("DotFiles: " + str(dots), YELLOW))
     print(colorize("Total: " + str(total), WHITE))
 
 elif args.com == "listA":
