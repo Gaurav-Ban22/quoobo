@@ -1,14 +1,11 @@
 import argparse
-from asyncore import dispatcher_with_send
-from ctypes.wintypes import tagMSG
-from dataclasses import asdict
+
+
 from datetime import datetime
-import io
-from ssl import ALERT_DESCRIPTION_NO_RENEGOTIATION
+
 
 yes = datetime.now()
 import os
-
 
 
 RESET = "\u001B[0m"
@@ -32,6 +29,8 @@ WHITE_BOLD = "\033[1;37m"
 def colorize(text, color):
     return color + text + RESET
 
+
+
 class algo:
 
     def __init__(self, tags, description, name, link, index):
@@ -53,7 +52,6 @@ algos = [
 
 parser = argparse.ArgumentParser();
 subparser = parser.add_subparsers(dest='com', help="sub-command-help")
-
 about = subparser.add_parser("about", help="about command")
 about.add_argument("-m", help="more about information", action="store_true")
 hau = subparser.add_parser("conti", help="content information")
@@ -66,7 +64,7 @@ repeated = lista.add_argument("shees")
 repeato = list.add_argument("-u", help="unstable expanded format", action="store_true")
 repeato = list.add_argument("-e", help="expanded format", action="store_true")
 listee = subparser.add_parser("date", help = "time information to show through terminal")
-
+alg = subparser.add_parser("tree", help = "tree") 
 alg = subparser.add_parser("searchA", help = "search algo list") 
 algg = alg.add_argument("-n", help="unstable expanded format", action="store_true")
 alggg =alg.add_argument("-c", help="unstable expanded format", action="store_true")
@@ -75,6 +73,26 @@ algggggggggg =alg.add_argument("-l", help="unstable expanded format", action="st
 alggggggg = alg.add_argument("given")
 
 alga = subparser.add_parser("listA", help = "algo list") 
+
+# create a new command that converts a string to uppercase
+uppercase = subparser.add_parser("uppercase", help="convert a string to uppercase")
+uppercase.add_argument("string", help="the string to convert to uppercase")
+
+
+
+
+
+
+
+
+def tree(path, lvl):
+    for file in os.listdir(path):
+        if os.path.isfile(os.path.join(path, file)):
+            print(colorize(("   " * lvl + "-" + file), GREEN))
+        else:
+            print(colorize(("   " * lvl + "-" + file), BLUE))
+            tree(os.path.join(path, file), lvl + 1)
+            #can multiply strings by integers to repeat them, I didn't know that :O
 
 
 
@@ -90,6 +108,9 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
     print(x)
+elif args.com == "tree":
+    tree(os.getcwd(), 0)
+
 elif args.com == "listA":
     for i in algos:
             print(str(i.index) + "  " + colorize(i.name, GREEN) + ": " + colorize(i.description, YELLOW)) 
@@ -209,8 +230,8 @@ elif args.com == "ls":
                 print(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
 
 
-        
-        
-        
 
-    
+#uses argparse top make a cli pog
+
+
+
