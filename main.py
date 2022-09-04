@@ -83,6 +83,8 @@ java = kotlin.add_argument("file")
 kotlina = subparser.add_parser("add", help = "add") 
 javaa = kotlina.add_argument("fileLib")
 
+kotlinaaa = subparser.add_parser("mkd", help = "mkdir") 
+javaaaa = kotlinaaa.add_argument("dir")
 kotlinaa = subparser.add_parser("re", help = "rename any file given as extra parameter") 
 javaaa = kotlinaa.add_argument("files", nargs="+")
 
@@ -131,6 +133,12 @@ elif args.com == "re":
 elif args.com == "add":
     fileP = open(os.getcwd() + ("/" + args.fileLib), "x") #x means create file exclusively
     print(colorize("Created file!", GREEN))
+elif args.com == "mkd":
+    try:
+        os.mkdir(os.getcwd() + ("/" + args.dir))
+        print(colorize("Created directory", GREEN))
+    except FileExistsError:
+        print(colorize("Directory already exists in given cwd", RED))
 elif args.com == "del":
     if os.path.isfile(os.getcwd() + ("/" + args.file)):
         x = input(colorize(("Are you sure you want to delete file " + args.file + "? (y/n) "), YELLOW))
