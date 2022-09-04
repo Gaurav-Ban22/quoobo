@@ -2,6 +2,7 @@ import argparse
 
 
 from datetime import datetime
+from genericpath import isfile
 
 
 yes = datetime.now()
@@ -76,6 +77,9 @@ algggg =alg.add_argument("-i", help="unstable expanded format", action="store_tr
 algggggggggg =alg.add_argument("-l", help="unstable expanded format", action="store_true")
 alggggggg = alg.add_argument("given")
 
+kotlin = subparser.add_parser("del", help = "delete") 
+java = kotlin.add_argument("file")
+
 alga = subparser.add_parser("listA", help = "algo list") 
 
 def tree(path, lvl, unstable):
@@ -102,6 +106,24 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
     print(colorize(x, GREEN))
+elif args.com == "del":
+    if os.path.isfile(os.getcwd() + ("/" + args.file)):
+        x = input(colorize(("Are you sure you want to delete file " + args.file + "? (y/n) "), YELLOW))
+        if x == "y":
+            os.remove(os.getcwd() + ("/" + args.file))
+        else:
+            print("File not deleted")
+    elif os.path.isdir(os.getcwd() + ("/" + args.file)):
+        x = input(colorize(("Are you sure you want to delete folder " + args.file + "? (y/n) "), YELLOW))
+        if x == "y":
+            os.remove(os.getcwd() + ("/" + args.file))
+        else:
+            print(colorize("Folder not deleted", GREEN))
+    else:
+        print(colorize("File or directory not found", RED_BOLD))
+    
+        
+    
 elif args.com == "lorem":
     x = lo.split(" ")
     if len(args.ipsum) <= len(x):
