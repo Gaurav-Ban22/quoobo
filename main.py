@@ -83,6 +83,9 @@ java = kotlin.add_argument("file")
 kotlina = subparser.add_parser("add", help = "add") 
 javaa = kotlina.add_argument("fileLib")
 
+kotlinaa = subparser.add_parser("re", help = "rename any file given as extra parameter") 
+javaaa = kotlinaa.add_argument("files", nargs="+")
+
 alga = subparser.add_parser("listA", help = "algo list") 
 
 def tree(path, lvl, unstable):
@@ -109,6 +112,22 @@ elif args.com == "echo":
     for i in enumerate(args.echoo):
         x += i[1] + " "
     print(colorize(x, GREEN))
+elif args.com == "re":
+    if (len(args.files) > 2):
+            print("Too many arguments; only provide 2 - 1 file to rename and 1 name to rename it to. Please include the file type, such as test.txt or main.py")
+    if (os.path.isfile(os.getcwd() + "/" + args.files[0])):
+        x = input(colorize("Are you sure you want to rename " + args.files[0] + " to " + args.files[1] + "? (y/n)", YELLOW))
+        if x == "y":
+            os.rename(os.getcwd() + "/" + args.files[0], args.files[1])
+        else:
+            print(colorize("Rename not performed", RED))
+    else:
+        x = input(colorize("Are you sure you want to rename directory " + args.files[0] + " to " + args.files[1] + "? (y/n)", YELLOW))
+        if x == "y":
+            os.rename(os.getcwd() + "/" + args.files[0], args.files[1])
+        else:
+            print(colorize("Rename not performed", RED))
+
 elif args.com == "add":
     fileP = open(os.getcwd() + ("/" + args.fileLib), "x") #x means create file exclusively
     print(colorize("Created file!", GREEN))
