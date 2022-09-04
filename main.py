@@ -7,7 +7,7 @@ from datetime import datetime
 yes = datetime.now()
 import os
 
-
+lo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum convallis ante a vulputate. Pellentesque pulvinar congue diam ut bibendum. Phasellus non sem sed leo commodo feugiat. Sed bibendum mollis lorem aliquam rhoncus. Proin egestas pharetra augue ut porta. Sed turpis arcu, vulputate sit amet semper in, convallis ut eros. Nullam eu leo risus. Mauris suscipit, dolor ut accumsan gravida, leo libero tincidunt erat, a consectetur dui turpis id orci. Nullam sollicitudin ante et tellus dignissim mollis. Praesent lacinia turpis non risus fringilla mollis. Vestibulum non nibh non eros venenatis hendrerit. Morbi rhoncus sagittis orci, sed bibendum neque malesuada viverra. Phasellus ex quam, dignissim et tortor quis, semper fermentum leo. Integer finibus sapien et posuere gravida. Sed fermentum nulla eu neque pulvinar sagittis. Vivamus eu nunc eget velit lobortis consequat sed nec lectus. Donec eget accumsan ipsum. Sed et massa varius urna mattis porttitor in vel sem. Fusce ornare lorem molestie, commodo nisi mattis, varius odio. Sed vulputate, risus at eleifend molestie, augue justo ornare nisl, vel ullamcorper orci tellus vitae lectus. Curabitur aliquet eros in arcu laoreet ultrices. Suspendisse potenti. Maecenas varius dolor eget ex faucibus, nec commodo lorem aliquet. Sed justo dolor, fringilla ac ipsum sit amet, lacinia fermentum ex."
 
 RESET = "\u001B[0m"
 BLACK = "\u001B[30m"
@@ -67,6 +67,8 @@ repeato = list.add_argument("-e", help="expanded format", action="store_true")
 listee = subparser.add_parser("date", help = "time information to show through terminal")
 awlg = subparser.add_parser("tree", help = "tree") 
 tre = awlg.add_argument("-b", help="unstable expanded format", action="store_true")
+csharp = subparser.add_parser("lorem", help = "lorem ipsum") 
+a = csharp.add_argument("ipsum")
 alg = subparser.add_parser("searchA", help = "search algo list") 
 algg = alg.add_argument("-n", help="unstable expanded format", action="store_true")
 alggg =alg.add_argument("-c", help="unstable expanded format", action="store_true")
@@ -75,17 +77,6 @@ algggggggggg =alg.add_argument("-l", help="unstable expanded format", action="st
 alggggggg = alg.add_argument("given")
 
 alga = subparser.add_parser("listA", help = "algo list") 
-
-# create a new command that converts a string to uppercase
-uppercase = subparser.add_parser("uppercase", help="convert a string to uppercase")
-uppercase.add_argument("string", help="the string to convert to uppercase")
-
-
-
-
-
-
-
 
 def tree(path, lvl, unstable):
     for file in os.listdir(path):
@@ -99,9 +90,6 @@ def tree(path, lvl, unstable):
             print(colorize(("   " * lvl + "-" + file), BLUE))
             tree(os.path.join(path, file), lvl + 1, True)
             
-
-
-
 args = parser.parse_args()
 
 if args.com == "about":
@@ -113,7 +101,12 @@ elif args.com == "echo":
     x = ""
     for i in enumerate(args.echoo):
         x += i[1] + " "
-    print(x)
+    print(colorize(x, GREEN))
+elif args.com == "lorem":
+    x = lo.split(" ")
+    if len(args.ipsum) <= len(x):
+        print(colorize(" ".join(x[:int(args.ipsum)]), GREEN))
+
 elif args.com == "tree":
     tree(os.getcwd(), 0, args.b)
     files = 0
