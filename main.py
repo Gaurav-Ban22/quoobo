@@ -154,6 +154,10 @@ elif args.com == "del":
     elif os.path.isdir(os.getcwd() + ("/" + args.file)):
         if (len(os.listdir(os.getcwd() + "/" + args.file)) != 0):
             p = "There are " + str(len(os.listdir(os.getcwd() + "/" + args.file))) + " items in this directory. "
+            if (len(os.listdir(os.getcwd() + "/" + args.file)) == 1):
+                p = "There is 1 item in this directory. "
+
+            
         x = input(colorize(("Are you sure you want to delete folder " + args.file + "? " + p +  "(y/n) "), YELLOW))
         if x == "y":
             try:
