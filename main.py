@@ -96,11 +96,11 @@ def tree(path, lvl, unstable):
             print(colorize(("   " * lvl + "-" + file), GREEN))
         elif not file.startswith(".") and not unstable:
             print(colorize(("   " * lvl + "-" + file), BLUE))
-            tree(os.path.join(path, file), lvl + 1, False)
+            tree(os.path.join(path, file), lvl + 1, unstable)
             #can multiply strings by integers to repeat them, I didn't know that :O
         elif unstable:
             print(colorize(("   " * lvl + "-" + file), BLUE))
-            tree(os.path.join(path, file), lvl + 1, True)
+            tree(os.path.join(path, file), lvl + 1, unstable)
             
 args = parser.parse_args()
 
@@ -115,20 +115,22 @@ elif args.com == "echo":
         x += i[1] + " "
     print(colorize(x, GREEN))
 elif args.com == "re":
+    isF = ""
     if (len(args.files) > 2):
-            print("Too many arguments; only provide 2 - 1 file to rename and 1 name to rename it to. Please include the file type, such as test.txt or main.py")
-    if (os.path.isfile(os.getcwd() + "/" + args.files[0])):
-        x = input(colorize("Are you sure you want to rename " + args.files[0] + " to " + args.files[1] + "? (y/n)", YELLOW))
-        if x == "y":
-            os.rename(os.getcwd() + "/" + args.files[0], args.files[1])
-        else:
-            print(colorize("Rename not performed", RED))
+            print(colorize("Too many arguments; only provide 2 - 1 file to rename and 1 name to rename it to. Please include the file type, such as test.txt or main.py", RED))
     else:
-        x = input(colorize("Are you sure you want to rename directory " + args.files[0] + " to " + args.files[1] + "? (y/n)", YELLOW))
+        if (os.path.isfile(os.getcwd() + "/" + args.files[0])):
+            isF = "file"
+            
+        else:
+            isF = "directory"
+
+        x = input(colorize("Are you sure you want to rename " + isF + " " + args.files[0] + " to " + args.files[1] + "? (y/n)", YELLOW))
         if x == "y":
             os.rename(os.getcwd() + "/" + args.files[0], args.files[1])
         else:
             print(colorize("Rename not performed", RED))
+            
 
 elif args.com == "add":
     fileP = open(os.getcwd() + ("/" + args.fileLib), "x") #x means create file exclusively
