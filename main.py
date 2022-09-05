@@ -4,7 +4,7 @@ import argparse
 from datetime import datetime
 from genericpath import isfile
 
-
+import shutil
 yes = datetime.now()
 import os
 
@@ -27,10 +27,11 @@ BLUE_BOLD = "\033[1;34m"
 PURPLE_BOLD = "\033[1;35m"
 CYAN_BOLD = "\033[1;36m"
 WHITE_BOLD = "\033[1;37m"
+#this is a cli with multiple commands
 
 def colorize(text, color):
     return color + text + RESET
-
+#cli
 
 
 class algo:
@@ -151,7 +152,14 @@ elif args.com == "del":
     elif os.path.isdir(os.getcwd() + ("/" + args.file)):
         x = input(colorize(("Are you sure you want to delete folder " + args.file + "? (y/n) "), YELLOW))
         if x == "y":
-            os.remove(os.getcwd() + ("/" + args.file))
+            try:
+                os.rmdir(os.getcwd() + ("/" + args.file))
+            except OSError:
+                z = input(colorize("Folder is not empty! Are you sure you want to delete this? (y/n)", YELLOW))
+                if z == "y":
+                    shutil.rmtree(os.getcwd() + ("/" + args.file))
+                else:
+                    print(colorize("Folder not deleted", RED))
         else:
             print(colorize("Folder not deleted", GREEN))
     else:
