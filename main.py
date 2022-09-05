@@ -143,23 +143,25 @@ elif args.com == "mkd":
     except FileExistsError:
         print(colorize("Directory already exists in given cwd", RED))
 elif args.com == "del":
+    p = ""
     if os.path.isfile(os.getcwd() + ("/" + args.file)):
         x = input(colorize(("Are you sure you want to delete file " + args.file + "? (y/n) "), YELLOW))
         if x == "y":
             os.remove(os.getcwd() + ("/" + args.file))
+            print(colorize("Folder deleted", RED))
         else:
             print("File not deleted")
     elif os.path.isdir(os.getcwd() + ("/" + args.file)):
-        x = input(colorize(("Are you sure you want to delete folder " + args.file + "? (y/n) "), YELLOW))
+        if (len(os.listdir(os.getcwd() + "/" + args.file)) != 0):
+            p = "There are " + str(len(os.listdir(os.getcwd() + "/" + args.file))) + " items in this directory. "
+        x = input(colorize(("Are you sure you want to delete folder " + args.file + "? " + p +  "(y/n) "), YELLOW))
         if x == "y":
             try:
                 os.rmdir(os.getcwd() + ("/" + args.file))
+                print(colorize("Folder deleted", RED))
             except OSError:
-                z = input(colorize("Folder is not empty! Are you sure you want to delete this? (y/n)", YELLOW))
-                if z == "y":
-                    shutil.rmtree(os.getcwd() + ("/" + args.file))
-                else:
-                    print(colorize("Folder not deleted", RED))
+                shutil.rmtree(os.getcwd() + ("/" + args.file))
+                print(colorize("Folder deleted", RED))
         else:
             print(colorize("Folder not deleted", GREEN))
     else:
