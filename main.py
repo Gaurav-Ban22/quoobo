@@ -150,7 +150,7 @@ elif args.com == "cat":
             try:
                 li = t.readlines()
                 
-                print(colorize(args.argu[0] + " catted with " args.argu[1],BLUE))
+                print(colorize(args.argu[0] + " catted with " + args.argu[1],BLUE))
                 print("---------------------------------")
                 for i in (li):        
                     print(colorize(i, GREEN))
