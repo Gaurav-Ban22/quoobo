@@ -61,6 +61,8 @@ hau = subparser.add_parser("conti", help="content information")
 
 echo = subparser.add_parser("echo", help = "repeat any singularworded string")
 repeated = echo.add_argument("echoo", nargs="+")
+addd = subparser.add_parser("cat", help = "add to back of any file, or concatenate two of them")
+adddd = addd.add_argument("argu", nargs="+")
 list = subparser.add_parser("ls", help = "blue is file, green is folder")
 lista = subparser.add_parser("disp", help = "printout") 
 repeated = lista.add_argument("shees")
@@ -142,6 +144,30 @@ elif args.com == "mkd":
         print(colorize("Created directory", GREEN))
     except FileExistsError:
         print(colorize("Directory already exists in given cwd", RED))
+elif args.com == "cat":
+    try:
+        with open(os.getcwd()+"/"+args.argu[0], "r") as t:
+            try:
+                li = t.readlines()
+                
+                print(colorize(args.argu[0] + " catted with " args.argu[1],BLUE))
+                print("---------------------------------")
+                for i in (li):        
+                    print(colorize(i, GREEN))
+               
+            except:
+                print(colorize(("Cannot read or fine file " + args.argu[0]), RED))
+        with open(os.getcwd()+"/"+args.argu[1], "r") as t:
+            try:
+                print("\n")
+                li = t.readlines()            
+                for i in (li):        
+                    print(colorize(i, GREEN))
+                print("---------------------------------")
+            except:
+                print(colorize(("Cannot read or find file " + args.argu[1]), RED))
+    except:
+        print(colorize(("There was an error with your request"), RED))
 elif args.com == "del":
     p = ""
     if os.path.isfile(os.getcwd() + ("/" + args.file)):
