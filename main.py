@@ -174,7 +174,7 @@ elif args.com == "del":
         x = input(colorize(("Are you sure you want to delete file " + args.file + "? (y/n) "), YELLOW))
         if x == "y":
             os.remove(os.getcwd() + ("/" + args.file))
-            print(colorize("Folder deleted", RED))
+            print(colorize("File deleted", RED))
         else:
             print("File not deleted")
     elif os.path.isdir(os.getcwd() + ("/" + args.file)):
