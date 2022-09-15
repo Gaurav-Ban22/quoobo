@@ -317,6 +317,7 @@ elif args.com == "ls":
             else:
                 total.append(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
         for i in range(0, len(total), 3):
+            #(" " * abs(len(total[i+1]) - len(total[i+2]))) this might be used later for spacing
             x = ""
             y = "   "
             x += total[i] + y
