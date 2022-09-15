@@ -5,6 +5,7 @@ from datetime import datetime
 from genericpath import isfile
 
 import shutil
+from tkinter import Y
 yes = datetime.now()
 import os
 
@@ -309,19 +310,20 @@ elif args.com == "ls":
         for f in os.listdir(os.getcwd()):
             if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (f.startswith(".")):
-                    total.append(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      ")
+                    total.append(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
                 else:
 
-                    total.append(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      ")
+                    total.append(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
             else:
-                total.append(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      ")
+                total.append(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
         for i in range(0, len(total), 3):
             x = ""
-            x += total[i]
+            y = "   "
+            x += total[i] + y
             if i+1 <= len(total)-1:
-                x += total[i+1]
+                x += total[i+1] + y
             if i+2 <= len(total)-1:
-                x += total[i+2]
+                x += total[i+2] + y
             print(x)
     
     elif (args.u):
