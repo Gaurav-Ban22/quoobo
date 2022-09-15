@@ -305,25 +305,25 @@ elif args.com == "date":
     print(colorize(dataso, GREEN))
 elif args.com == "ls":
     if (not args.e and not args.u):
-        counter = 0
-        total = ""
+        total = []
         for f in os.listdir(os.getcwd()):
-            if (counter < 3):
-                counter += 1
-            else:
-                print(total)
-                total = ""
-                counter = 0
-            
             if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (f.startswith(".")):
-                    total += colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      "
+                    total.append(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      ")
                 else:
 
-                    total += colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      "
+                    total.append(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      ")
             else:
-                total += colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      "
-        print(total)
+                total.append(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      ")
+        for i in range(0, len(total), 3):
+            x = ""
+            x += total[i]
+            if i+1 <= len(total)-1:
+                x += total[i+1]
+            if i+2 <= len(total)-1:
+                x += total[i+2]
+            print(x)
+    
     elif (args.u):
         for f in os.listdir(os.getcwd()):
             
