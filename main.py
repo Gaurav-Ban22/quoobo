@@ -176,7 +176,7 @@ elif args.com == "del":
             os.remove(os.getcwd() + ("/" + args.file))
             print(colorize("File deleted", RED))
         else:
-            print("File not deleted")
+           print(colorize("File not deleted", GREEN))
     elif os.path.isdir(os.getcwd() + ("/" + args.file)):
         if (len(os.listdir(os.getcwd() + "/" + args.file)) != 0):
             p = "There are " + str(len(os.listdir(os.getcwd() + "/" + args.file))) + " items in this directory. "
@@ -257,7 +257,7 @@ elif args.com == "searchA":
                     print(colorize(i.link, BLUE)) 
             
         except:
-            print(colorize("There was an issue with the index provided", RED))
+            print(colorize("There was an issue with the index provided", RED_BOLD))
 
         
 
@@ -305,16 +305,25 @@ elif args.com == "date":
     print(colorize(dataso, GREEN))
 elif args.com == "ls":
     if (not args.e and not args.u):
+        counter = 0
+        total = ""
         for f in os.listdir(os.getcwd()):
+            if (counter < 3):
+                counter += 1
+            else:
+                print(total)
+                total = ""
+                counter = 0
             
             if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (f.startswith(".")):
-                    print(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                    total += colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      "
                 else:
 
-                    print(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                    total += colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      "
             else:
-                print(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                total += colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes      "
+        print(total)
     elif (args.u):
         for f in os.listdir(os.getcwd()):
             
@@ -347,5 +356,6 @@ elif args.com == "ls":
 
 #uses argparse top make a cli pog
 
+#can make a counter to basically make a gridded ls form insted of a normal listy lsorm.
 
-
+#argparse cli pyhton code ocmpild and on gkthub csharp
