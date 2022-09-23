@@ -34,6 +34,9 @@ def colorize(text, color):
     return color + text + RESET
 #cli
 
+def colorizeT(text, color):
+    return color + " " + text + " " + RESET
+
 
 class algo:
 
@@ -306,26 +309,49 @@ elif args.com == "date":
     print(colorize(dataso, GREEN))
 elif args.com == "ls":
     if (not args.e and not args.u):
+        highest  = 0
         total = []
         for f in os.listdir(os.getcwd()):
             if (os.path.isdir(os.getcwd()+"/"+f)):
                 if (f.startswith(".")):
-                    total.append(colorize(f, YELLOW)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                    total.append(colorizeT(f, YELLOW))
                 else:
-
-                    total.append(colorize(f, GREEN)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                    total.append(colorizeT(f, GREEN))
             else:
-                total.append(colorize(f, BLUE)+ "  " + str(os.path.getsize(os.getcwd()+"/"+f)) + "  bytes")
+                total.append(colorizeT(f, BLUE))
+            if len(f) > highest:
+                highest = len(f)
+
+        
         for i in range(0, len(total), 3):
             #(" " * abs(len(total[i+1]) - len(total[i+2]))) this might be used later for spacing
+            #write csharp astar pathfinding algorithm xd (not actually gonna use it want to write it myself)
+            
+            
+
             x = ""
+            z = "   "
             y = "   "
-            x += total[i] + y
+            
             if i+1 <= len(total)-1:
-                x += total[i+1] + y
-            if i+2 <= len(total)-1:
-                x += total[i+2] + y
+                x += total[i] + y + (" " * (highest - (len(total[i])-19))) #oh its because of the colorcodes??
+            else:
+                x+= total[i] + y
+            
+            if i+1 <= len(total)-1:
+                if (i+2 <= len(total)-1):
+                    x += total[i+1] + y + (" " * (highest - (len(total[i+1]) - 19))) + total[i+2]
+                else:
+                    x += total[i+1]
             print(x)
+            #   #
+            #   #
+            #        #
+            #        #
+            #    #
+            #    #
+            
+
     
     elif (args.u):
         for f in os.listdir(os.getcwd()):
